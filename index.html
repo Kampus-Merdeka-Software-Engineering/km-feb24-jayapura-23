@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - PizzaSales 23</title>
 
-    <!-- styles -->
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <!-- custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
 </head>
 <body>
@@ -18,7 +23,11 @@
         <nav class="navbar">
            <div class="container">
             <div class="title-page">
-                <h2>Dashboard  PizzaSales 23</h2>
+                <h2>
+                    <span style="color: black;">Dashboard</span> 
+                    <span style="color: blue;">PizzaSales</span>
+                    <span style="color: black;">23</span>
+                </h2>
             </div>
            </div>
         </nav>
@@ -26,7 +35,6 @@
     <!-- Header -->
 
     <!-- Content -->
-
     <section class="page-content">
         <div class="container">
             <div class="box-wrapper">
@@ -70,57 +78,77 @@
     
             </div>
 
-            <div class="box-wrapper 2">
-                <div class="box-medium">
-                    <h4>Total Receipt</h4>
-                    <h5>21.350</h5>
+            <div class="main-cards">
+                <div class="card">
+                        <div class="card-inner">
+                        <h3>Total Receipt</h3>
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        </div>
+                        <h1>21.350</h1>
                 </div>
-                <div class="box-medium">
-                    <h4>Total Sales</h4>
-                    <h5>56 000</h5>
+
+                <div class="card">
+                        <div class="card-inner">
+                        <h3>Total Sales</h3>
+                        <span class="material-symbols-outlined">attach_money</span>
+                        </div>
+                        <h1>56.000</h1>
                 </div>
-                <div class="box-medium">
-                    <h4>Total Quantity</h4>
-                    <h5>50.000</h5>
+
+                <div class="card">
+                        <div class="card-inner">
+                        <h3>Total Quantity</h3>
+                        <span class="material-symbols-outlined">groups</span>
+                        </div>
+                        <h1>50.000</h1>
                 </div>
-                <div class="box-medium">
-                    <h4>Total Type</h4>
-                    <h5>10</h5>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <h3>Total Type</h3>
+                        <span class="material-symbols-outlined">local_pizza</span>
+                        </div>
+                        <h1>10</h1>
                 </div>
             </div>
 
-        
+            <div class="charts">
 
-<div class="box-wrapper-2">
-    <div class="box-wrapper">
-        <div class="box-small">
-            <h4>Box 1</h4>
-        </div>
-        <div class="box-small">
-            <h4>Box 2</h4>
-        </div>
-    </div>
-    <div class="box-wrapper">
-        <div class="box-small">
-            <h4>Box 3</h4>
-        </div>
-        <div class="box-small">
-            <h4>Box 4</h4>
-        </div>
-    </div>
-</div>
+                <div class="charts-card">
+                    <h2 class="chart-title">Statistics of  Most Sales</h2>
+                    <div id="bar-chart"></div>
+                </div>
+
+                <div class="charts-card">
+                    <h2 class="chart-title">Statistics of Time Tagging</h2>
+                    <div id="area-chart"></div>
+                </div>
+
+                <div class="charts-card">
+                    <h2 class="chart-title">Statistics of  Most Sales</h2>
+                    <div id="bar-chart"></div>
+                </div>
+
+            </div>
 
         </div>
     </section>
-
     <!-- Content -->
 
+    <!-- footer -->
     <footer class="footer-wrapper">
         <div class="container">
-            <p>Copyright &copy; 2024 - Team 23</p>
+            <h4>Copyright &copy; 2024 - Team 23</h4>
         </div>
     </footer>
+    <!-- footer -->
 
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <!-- Scripts -->
 
 </body>
 </html>
