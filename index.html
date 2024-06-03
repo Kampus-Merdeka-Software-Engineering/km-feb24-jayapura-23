@@ -14,7 +14,9 @@
 
     <!-- custom CSS -->
     <link rel="stylesheet" href="./css/styles.css">
-
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -39,7 +41,7 @@
         <div class="container">
             <div class="box-wrapper">
                     <select name="date_order" id="date_order">
-                        <option value="K1">Date Order (Kuartal)</option>
+                        <option value="K1">All Kuartal</option>
                         <option value="K1">K1</option>
                         <option value="K2">K2</option>
                         <option value="K3">K3</option>
@@ -49,7 +51,7 @@
 
              
                     <select name="category" id="category">
-                        <option value="category">Category</option>
+                        <option value="all" selected>All Category</option>
                         <option value="Classic">Classic</option>
                         <option value="Supreme">Supreme</option>
                         <option value="Chicken">Chicken</option>
@@ -59,7 +61,7 @@
 
                 
                     <select name="size" id="size">
-                        <option value="size">Size</option>
+                        <option value="all_size">All Size</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
@@ -69,12 +71,14 @@
              
 
                 
-                    <select name="time" id="time">
+                    <!-- <select name="time" id="time">
                         <option value="time">Time</option>
                         <option value="Morning">Morning</option>
                         <option value="Afternoon">Afternoon</option>
                         <option value="Night">Night</option>
-                    </select>
+                    </select> -->
+
+                    <button id="btn-filter">Filter</button>
     
             </div>
 
@@ -84,7 +88,7 @@
                         <h3>Total Receipt</h3>
                         <span class="material-symbols-outlined">receipt_long</span>
                         </div>
-                        <h1>21.350</h1>
+                        <h1 id="total-receipt">0</h1>
                 </div>
 
                 <div class="card">
@@ -92,7 +96,7 @@
                         <h3>Total Sales</h3>
                         <span class="material-symbols-outlined">attach_money</span>
                         </div>
-                        <h1>56.000</h1>
+                        <h1 id="total-sales">0</h1>
                 </div>
 
                 <div class="card">
@@ -100,7 +104,7 @@
                         <h3>Total Quantity</h3>
                         <span class="material-symbols-outlined">groups</span>
                         </div>
-                        <h1>50.000</h1>
+                        <h1 id="total-qty">0</h1>
                 </div>
 
                 <div class="card">
@@ -108,7 +112,7 @@
                         <h3>Total Type</h3>
                         <span class="material-symbols-outlined">local_pizza</span>
                         </div>
-                        <h1>10</h1>
+                        <h1 id="total-category">0</h1>
                 </div>
             </div>
 
@@ -116,18 +120,24 @@
 
                 <div class="charts-card">
                     <h2 class="chart-title">Statistics of  Most Sales</h2>
-                    <div id="bar-chart"></div>
+                    <canvas id="salesChart"></canvas>
                 </div>
 
                 <div class="charts-card">
                     <h2 class="chart-title">Statistics of Time Tagging</h2>
-                    <div id="area-chart"></div>
+                    <canvas id="timeTaggingChart"></canvas>
+                </div>
+
+                <div class="charts-card">
+                    <h2 class="chart-title">Statistics of Best Tagging</h2>
+                    <canvas id="bestTaggingChart"></canvas>
                 </div>
 
                 <div class="charts-card">
                     <h2 class="chart-title">Statistics of  Most Sales</h2>
                     <div id="bar-chart"></div>
                 </div>
+
 
             </div>
 
@@ -148,7 +158,100 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <!-- Custom JS -->
     <script src="js/script.js"></script>
-    <!-- Scripts -->
 
+    <script>
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [65000, 70000, 75000, 70000, 75000, 72000, 80000, 68000, 66000, 68000, 74000, 69000],
+                    backgroundColor: function(context) {
+                        const index = context.dataIndex;
+                        const month = context.chart.data.labels[index];
+                        return month === 'Jul' ? 'rgba(54, 162, 235, 1)' : 'rgba(54, 162, 235, 0.2)';
+                    },
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value / 1000 + 'k';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const ctxTimeTagging = document.getElementById('timeTaggingChart').getContext('2d');
+        const timeTaggingChart = new Chart(ctxTimeTagging, {
+            type: 'doughnut',
+            data: {
+                labels: ['Breakfast Time', 'Lunch Time', 'Dinner Time'],
+                datasets: [{
+                    data: [48.5, 45.5, 6],
+                    backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384'],
+                    hoverBackgroundColor: ['#36A2EB', '#FFCE56', '#FF6384'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+
+        const ctxBestTagging = document.getElementById('bestTaggingChart').getContext('2d');
+        const bestTaggingChart = new Chart(ctxBestTagging, {
+            type: 'bar',
+            data: {
+                labels: ['The Thai Chicken Pizza', 'The Barbecue Chicken Pizza', 'The California Chicken Pizza'],
+                datasets: [{
+                    label: 'Tagging',
+                    data: [42000, 39000, 40000],
+                    backgroundColor: ['#CE93D8', '#FFEB3B', '#FFCDD2'],
+                    borderColor: ['#CE93D8', '#FFEB3B', '#FFCDD2'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Set the index axis to 'y' for horizontal bar chart
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
+
