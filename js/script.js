@@ -1,104 +1,72 @@
 loadDataJSON();
 
-function loadDataJSON(){
-
+function loadDataJSON() {
     fetch("../js/order_list.json")
-    .then(response => response.json())
-    .then(response => {
-        
-        let resultData = response;
+        .then(response => response.json())
+        .then(response => {
+            let resultData = response;
 
-        const categorySelected = document.getElementById("category").value;
-        const sizeSelected = document.getElementById("size").value;
-        // const quartalSelected = document.getElementById("size").value;
+            const quartalSelected = document.getElementById("kuartal").value;
 
-        if (
-          categorySelected != "all" &&
-          sizeSelected != "all_size"
-        ) {
-          const dataFilterByCategory = resultData.filter(
-            (item) =>
-              item.category == categorySelected && item.size == sizeSelected
-          );
+            if (quartalSelected != "all") {
+                const dataFilterByQuartal = resultData.filter(
+                    (item) => item.kuartal == quartalSelected
+                );
 
-          resultData = dataFilterByCategory;
-        } else if (categorySelected != "all" && sizeSelected == "all_size") {
-          const dataFilterByCategory = resultData.filter(
-            (item) => item.kuartal == kuartalSelected
-          );
+                console.log(quartalSelected, dataFilterByQuartal);
 
-          resultData = dataFilterByCategory;
-        } else if (categorySelected == "all" && sizeSelected != "all_size") {
-          const dataFilterByCategory = resultData.filter(
-            (item) => item.size == sizeSelected
-          );
+                resultData = dataFilterByQuartal; // Gunakan data yang telah difilter
+            }
 
-          resultData = dataFilterByCategory;
-        } else if (categorySelected != "all" && sizeSelected == "all_size") {
-          const dataFilterByCategory = resultData.filter(
-            (item) => item.category == categorySelected
-          );
-
-          resultData = dataFilterByCategory;
-        }
-          setCardData(resultData);
-
-    })
-    .catch(error => {
-        console.log(error);
-        alert("Gagal memuat data!");
-    });
+            setCardData(resultData);
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Gagal memuat data!");
+        });
 }
 
+function setCardData(resultData) {
+    // get total receipt
+    const totalReceipt = resultData.length;
 
-function setCardData(resultData){
-  // get total recueipt
-  const totalReceipt = resultData.length;
+    // get total sales
+    const totalSales = resultData.reduce(
+        (acc, itemData) => acc + itemData.total,
+        0
+    );
 
-  // get total sales
-  const totalSales = resultData.reduce(
-    (acc, itemData) => acc + itemData.total,
-    0
-  );
+    // get total qty
+    const totalQty = resultData.reduce(
+        (acc, itemData) => acc + itemData.quantity,
+        0
+    );
 
-  // get total qty
-  const totalQty = resultData.reduce(
-    (acc, itemData) => acc + itemData.quantity,
-    0
-  );
+    // get total type pizza
+    const totalType = Object.groupBy(resultData, ({ pizza_type_id }) => pizza_type_id);
+    const totalCategory = Object.entries(totalType).length;
 
-  //   get total type pizza
+    // set html el
+    document.getElementById("total-receipt").textContent = totalReceipt;
 
-  const totalType = Object.groupBy(resultData, ({ pizza_type_id }) => pizza_type_id);
-  const totalCategory = Object.entries(totalType).length;
+    // set total sales
+    document.getElementById("total-sales").textContent =
+        currencyFormat(totalSales);
 
-  //   console.log(resultData);
-  //   console.log("totalType", parseToArr);
+    // set total qty
+    document.getElementById("total-qty").textContent = totalQty;
 
-  // set html el
-  document.getElementById("total-receipt").textContent = totalReceipt;
-
-  // set total sales
-  document.getElementById("total-sales").textContent =
-    currencyFormat(totalSales);
-
-  // set total qty
-  document.getElementById("total-qty").textContent = totalQty;
-
-  // set total category
-  document.getElementById("total-category").textContent = totalCategory;
-  
+    // set total category
+    document.getElementById("total-category").textContent = totalCategory;
 }
 
-function currencyFormat(number){
+function currencyFormat(number) {
     return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
+        style: "currency",
+        currency: "USD",
     }).format(number);
 }
 
-document.getElementById("btn-filter").addEventListener("click", function(){
-    
+document.getElementById("btn-filter").addEventListener("click", function () {
     loadDataJSON();
-
-})
+});
