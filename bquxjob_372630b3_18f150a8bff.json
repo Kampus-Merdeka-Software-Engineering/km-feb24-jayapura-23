@@ -1,0 +1,81 @@
+[{
+  "size": "L",
+  "Avg_Sales": "20.180048739139618",
+  "quarter": "Q1"
+}, {
+  "size": "M",
+  "Avg_Sales": "16.213944856839937",
+  "quarter": "Q1"
+}, {
+  "size": "S",
+  "Avg_Sales": "12.585759844703274",
+  "quarter": "Q1"
+}, {
+  "size": "XL",
+  "Avg_Sales": "25.5",
+  "quarter": "Q1"
+}, {
+  "size": "XXL",
+  "Avg_Sales": "35.95",
+  "quarter": "Q1"
+}, {
+  "size": "L",
+  "Avg_Sales": "20.339465240641736",
+  "quarter": "Q2"
+}, {
+  "size": "M",
+  "Avg_Sales": "16.2034607696152",
+  "quarter": "Q2"
+}, {
+  "size": "S",
+  "Avg_Sales": "12.590907785119217",
+  "quarter": "Q2"
+}, {
+  "size": "XL",
+  "Avg_Sales": "26.1219512195122",
+  "quarter": "Q2"
+}, {
+  "size": "XXL",
+  "Avg_Sales": "35.95",
+  "quarter": "Q2"
+}, {
+  "size": "L",
+  "Avg_Sales": "20.242991360691089",
+  "quarter": "Q3"
+}, {
+  "size": "M",
+  "Avg_Sales": "16.154598445595923",
+  "quarter": "Q3"
+}, {
+  "size": "S",
+  "Avg_Sales": "12.660810810810801",
+  "quarter": "Q3"
+}, {
+  "size": "XL",
+  "Avg_Sales": "25.5",
+  "quarter": "Q3"
+}, {
+  "size": "XXL",
+  "Avg_Sales": "35.95",
+  "quarter": "Q3"
+}, {
+  "size": "L",
+  "Avg_Sales": "20.274766770324305",
+  "quarter": "Q4"
+}, {
+  "size": "M",
+  "Avg_Sales": "16.267728605705177",
+  "quarter": "Q4"
+}, {
+  "size": "S",
+  "Avg_Sales": "12.546561687373579",
+  "quarter": "Q4"
+}, {
+  "size": "XL",
+  "Avg_Sales": "26.342975206611577",
+  "quarter": "Q4"
+}, {
+  "size": "XXL",
+  "Avg_Sales": "35.95",
+  "quarter": "Q4"
+}]

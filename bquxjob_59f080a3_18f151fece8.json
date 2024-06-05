@@ -1,0 +1,53 @@
+[{
+  "time_tag": "makan siang",
+  "Avg_Sales": "16.891692972254557",
+  "quarter": "Q1"
+}, {
+  "time_tag": "makan malam",
+  "Avg_Sales": "16.681657706093173",
+  "quarter": "Q1"
+}, {
+  "time_tag": "makan pagi",
+  "Avg_Sales": "16.685433070866146",
+  "quarter": "Q1"
+}, {
+  "time_tag": "makan siang",
+  "Avg_Sales": "17.002162027832895",
+  "quarter": "Q2"
+}, {
+  "time_tag": "makan malam",
+  "Avg_Sales": "16.764757436260648",
+  "quarter": "Q2"
+}, {
+  "time_tag": "makan pagi",
+  "Avg_Sales": "17.0901854714065",
+  "quarter": "Q2"
+}, {
+  "time_tag": "makan pagi",
+  "Avg_Sales": "16.676797385620883",
+  "quarter": "Q3"
+}, {
+  "time_tag": "makan siang",
+  "Avg_Sales": "16.932442946058149",
+  "quarter": "Q3"
+}, {
+  "time_tag": "makan malam",
+  "Avg_Sales": "16.649814651368036",
+  "quarter": "Q3"
+}, {
+  "time_tag": "makan siang",
+  "Avg_Sales": "16.939650398061694",
+  "quarter": "Q4"
+}, {
+  "time_tag": "makan malam",
+  "Avg_Sales": "16.675396971935065",
+  "quarter": "Q4"
+}, {
+  "time_tag": "makan pagi",
+  "Avg_Sales": "16.891795665634685",
+  "quarter": "Q4"
+}, {
+  "time_tag": null,
+  "Avg_Sales": "20.75",
+  "quarter": "Q4"
+}]
