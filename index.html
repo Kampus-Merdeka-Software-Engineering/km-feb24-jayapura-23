@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - PizzaSales 23</title>
-    <link rel="icon" type="image/x-icon" href="/assets/icons/icon-pizza.png">
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -18,6 +17,12 @@
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+
+     <!--favicon-->
+     <link rel="icon" type="image/x-icon" href="/assets/icons/icon-pizza.png">
 </head>
 <body>
 
@@ -41,17 +46,17 @@
     <section class="page-content">
         <div class="container">
             <div class="box-wrapper">
-                    <select name="kuartal" id="kuartal">
-                        <option value="all">All Kuartal</option>
-                        <option value="k1">K1</option>
-                        <option value="k2">K2</option>
-                        <option value="k3">K3</option>
-                        <option value="k4">K4</option>
+                    <select name="date_order" id="quartal">
+                        <option value="all_quartal">All Kuartal</option>
+                        <option value="K1">K1</option>
+                        <option value="K2">K2</option>
+                        <option value="K3">K3</option>
+                        <option value="K4">K4</option>
                     </select>
 
 
              
-                    <!-- <select name="category" id="category">
+                    <select name="category" id="category">
                         <option value="all" selected>All Category</option>
                         <option value="Classic">Classic</option>
                         <option value="Supreme">Supreme</option>
@@ -59,26 +64,6 @@
                         <option value="Veggie">Veggie</option>
                     </select>
                
-
-                
-                    <select name="size" id="size">
-                        <option value="all_size">All Size</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
-              -->
-
-                
-                    <!-- <select name="time" id="time">
-                        <option value="time">Time</option>
-                        <option value="Morning">Morning</option>
-                        <option value="Afternoon">Afternoon</option>
-                        <option value="Night">Night</option>
-                    </select> -->
-
                     <button id="btn-filter">Filter</button>
     
             </div>
@@ -131,12 +116,21 @@
 
                 <div class="charts-card">
                     <h2 class="chart-title">Statistics of Best Tagging</h2>
-                    <canvas id="bestTaggingChart"></canvas>
+                    <canvas id="bestTaggingChart" ></canvas>
                 </div>
 
                 <div class="charts-card">
                     <h2 class="chart-title">Statistics of  Most Sales</h2>
-                    <div id="bar-chart"></div>
+                    <table id="order-list" class="display responsive bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date Order</th>
+                                <th>Pizza Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
 
 
@@ -155,104 +149,16 @@
     <!-- footer -->
 
     <!-- Scripts -->
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Datatables -->
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <!-- Custom JS -->
     <script src="js/script.js"></script>
 
-    <script>
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        const salesChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [65000, 70000, 75000, 70000, 75000, 72000, 80000, 68000, 66000, 68000, 74000, 69000],
-                    backgroundColor: function(context) {
-                        const index = context.dataIndex;
-                        const month = context.chart.data.labels[index];
-                        return month === 'Jul' ? 'rgba(54, 162, 235, 1)' : 'rgba(54, 162, 235, 0.2)';
-                    },
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value / 1000 + 'k';
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-
-        const ctxTimeTagging = document.getElementById('timeTaggingChart').getContext('2d');
-        const timeTaggingChart = new Chart(ctxTimeTagging, {
-            type: 'doughnut',
-            data: {
-                labels: ['Breakfast Time', 'Lunch Time', 'Dinner Time'],
-                datasets: [{
-                    data: [48.5, 45.5, 6],
-                    backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FFCE56', '#FF6384'],
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'right'
-                    }
-                }
-            }
-        });
-
-        const ctxBestTagging = document.getElementById('bestTaggingChart').getContext('2d');
-        const bestTaggingChart = new Chart(ctxBestTagging, {
-            type: 'bar',
-            data: {
-                labels: ['The Thai Chicken Pizza', 'The Barbecue Chicken Pizza', 'The California Chicken Pizza'],
-                datasets: [{
-                    label: 'Tagging',
-                    data: [42000, 39000, 40000],
-                    backgroundColor: ['#CE93D8', '#FFEB3B', '#FFCDD2'],
-                    borderColor: ['#CE93D8', '#FFEB3B', '#FFCDD2'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                indexAxis: 'y', // Set the index axis to 'y' for horizontal bar chart
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return value.toLocaleString();
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-    </script>
+   
 </body>
 </html>
 
