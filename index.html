@@ -23,89 +23,111 @@
 
      <!--favicon-->
      <link rel="icon" type="image/x-icon" href="/assets/icons/icon-pizza.png">
+
+    <!-- icon footer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
     <!-- Header -->
     <header>
         <nav class="navbar">
-           <div class="container">
-            <div class="title-page">
-                <h2>
-                    <span style="color: black;">Dashboard</span> 
-                    <span style="color: blue;">PizzaSales</span>
-                    <span style="color: black;">23</span>
-                </h2>
+            <div class="navMenu">
+                <div class="title-page">
+                    <h2>
+                        <span style="color: blue;">PizzaSales</span>
+                        <span style="color: black;">23</span>
+                    </h2>
+                </div>
+                <div class="menu">
+                    <ul class="menu-list">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="hamburger-menu">
+                    <!-- Hamburger Icon -->
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
-           </div>
         </nav>
     </header>
+        
     <!-- Header -->
 
     <!-- Content -->
-    <section class="page-content">
-        <div class="container">
+    <div class="page-content">
+
+        <section class="container" id="home">
+            <div class="hero-section">
+                <img src="assets/images/home.png" alt="Home Image" class="background-image"/>
+                <div class="content-overlay">
+                    <h1 class="light-heading">Pizza Place Sales<br> Data and Statistics</h1>
+                    <p>Data Analyst Pizza Place Sales 2015</p>
+                </div>
+            </div>                                             
+        </section>
+
+        <section class="container" id="dashboard">
+            <h1 style="text-align: center; margin-top: 50px;">Dashboard</h1>
             <div class="box-wrapper">
-                    <select name="date_order" id="quartal">
-                        <option value="all_quartal">All Kuartal</option>
-                        <option value="K1">K1</option>
-                        <option value="K2">K2</option>
-                        <option value="K3">K3</option>
-                        <option value="K4">K4</option>
-                    </select>
-
-
-             
-                    <select name="category" id="category">
-                        <option value="all" selected>All Category</option>
-                        <option value="Classic">Classic</option>
-                        <option value="Supreme">Supreme</option>
-                        <option value="Chicken">Chicken</option>
-                        <option value="Veggie">Veggie</option>
-                    </select>
-               
-                    <button id="btn-filter">Filter</button>
-    
+                <select name="date_order" id="quartal">
+                    <option value="all_quartal">All Kuartal</option>
+                    <option value="K1">K1</option>
+                    <option value="K2">K2</option>
+                    <option value="K3">K3</option>
+                    <option value="K4">K4</option>
+                </select>
+                <select name="category" id="category">
+                    <option value="all" selected>All Category</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Supreme">Supreme</option>
+                    <option value="Chicken">Chicken</option>
+                    <option value="Veggie">Veggie</option>
+                </select>
+                <button id="btn-filter">Filter</button>
             </div>
 
             <div class="main-cards">
                 <div class="card">
-                        <div class="card-inner">
+                    <div class="card-inner">
                         <h3>Total Receipt</h3>
                         <span class="material-symbols-outlined">receipt_long</span>
-                        </div>
-                        <h1 id="total-receipt">0</h1>
+                    </div>
+                    <h1 id="total-receipt">0</h1>
                 </div>
 
                 <div class="card">
-                        <div class="card-inner">
+                    <div class="card-inner">
                         <h3>Total Sales</h3>
                         <span class="material-symbols-outlined">attach_money</span>
-                        </div>
-                        <h1 id="total-sales">0</h1>
+                    </div>
+                    <h1 id="total-sales">0</h1>
                 </div>
 
                 <div class="card">
-                        <div class="card-inner">
+                    <div class="card-inner">
                         <h3>Total Quantity</h3>
                         <span class="material-symbols-outlined">groups</span>
-                        </div>
-                        <h1 id="total-qty">0</h1>
+                    </div>
+                    <h1 id="total-qty">0</h1>
                 </div>
 
                 <div class="card">
                     <div class="card-inner">
                         <h3>Total Type</h3>
                         <span class="material-symbols-outlined">local_pizza</span>
-                        </div>
-                        <h1 id="total-category">0</h1>
+                    </div>
+                    <h1 id="total-category">0</h1>
                 </div>
             </div>
 
             <div class="charts">
-
                 <div class="charts-card">
-                    <h2 class="chart-title">Statistics of  Most Sales</h2>
+                    <h2 class="chart-title">Statistics of Most Sales</h2>
                     <canvas id="salesChart"></canvas>
                 </div>
 
@@ -115,37 +137,186 @@
                 </div>
 
                 <div class="charts-card">
-                    <h2 class="chart-title">Statistics of Best Tagging</h2>
-                    <canvas id="bestTaggingChart" ></canvas>
+                    <h2 class="chart-title">Top 3 Pizza Type</h2>
+                    <canvas id="topPizzaChart"></canvas>
                 </div>
 
                 <div class="charts-card">
-                    <h2 class="chart-title">Statistics of  Most Sales</h2>
+                    <h2 class="chart-title">Average Sales Per Size Type Pizza</h2>
+                    <canvas id="pizzaSizeChart"></canvas>
+                </div>                
+
+                <div class="charts-card">
+                    <h2 class="chart-title">Database Order List</h2>
                     <table id="order-list" class="display responsive bordered" style="width:100%">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Order ID</th>
                                 <th>Date Order</th>
                                 <th>Pizza Name</th>
+                                <th>Ingredients</th>
+                                <th>Size</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
                     </table>
                 </div>
-
-
             </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="container" id="contact">
+            <h1 style="text-align: center; margin-top: 50px;">Our Team Jayapura 23</h1>
+            <div class="blok">
+                <div class="grid">
+                    <img src="assets/images/Dilla2.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Dilla Wahdana</p>
+                        <p>Position: PIC Data Cleaning and Project Leader Software Engineer</p>
+                        <p>University: Institut Teknologi Sepuluh Nopember</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/dill_a12" target="_blank" rel="noopener noreferrer">@dill_a12</a>
+                        </p>
+                    </div>
+                </div>
+            
+                <div class="grid">
+                    <img src="assets/images/Nada.jpg" alt="Nada">
+                    <div class="bio">
+                        <p>Name: Qatrunnada Salsabila</p>
+                        <p>Position: PIC Data Analysis and Pitch Deck Team</p>
+                        <p>University: Universitas Islam 45</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/nadaalbila" target="_blank" rel="noopener noreferrer">@nadaalbila</a>
+                        </p>
+                    </div>
+                </div>
+            
+                <div class="grid">
+                    <img src="assets/images/Lalu2.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Lalu Zainul Mujitahid</p>
+                        <p>Position: PIC Data Analysis and Deployment Team</p>
+                        <p>University: Universitas Mataram</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/lalumuji_" target="_blank" rel="noopener noreferrer">@lalumuji_</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/Aufar.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Aufar Raihan Rahmat</p>
+                        <p>Position: PIC Data Communication and Quality Assurance</p>
+                        <p>University: Universitas Airlangga</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/aufarraihanrahmatttt" target="_blank" rel="noopener noreferrer">@aufarraihanrahmatttt</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/Alif2.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Alif Destiano</p>
+                        <p>Position: Project Leader Data Analyst and Quality Assurance</p>
+                        <p>University: Institut Teknologi Sepuluh Nopember</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/alifdestiano" target="_blank" rel="noopener noreferrer">@alifdestiano</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/Saskya2.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Saskya Octavia Maharani</p>
+                        <p>Position: PIC Data Visualization and Front End Engineer</p>
+                        <p>University: Universitas Gunadarma</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/saskya_octv" target="_blank" rel="noopener noreferrer">@saskya_octv</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/Fatiya2.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Banatul Fatiyah</p>
+                        <p>Position: PIC Data Communication and Front End Engineer</p>
+                        <p>University: -</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/fatiya_bana" target="_blank" rel="noopener noreferrer">@fatiya_bana</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/Ulva2.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Ulva Niswa</p>
+                        <p>Position: PIC Data Cleaning and Pitch Deck Team</p>
+                        <p>University: Universitas Jabal Ghafur</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/ulvaniswaa" target="_blank" rel="noopener noreferrer">@ulvaniswaa</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/Widya.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Widiya Adesti</p>
+                        <p>Position: PIC Data Visualization and Front End Engineer</p>
+                        <p>University: Universitas Wahid Hasyim</p>
+                        <p>Medsos: 
+                            <a href="https://www.instagram.com/widiyadst_" target="_blank" rel="noopener noreferrer">@widiyadst_</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/hmm.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Aulia Rahmat Aryawan</p>
+                        <p>Position: PIC Data Visualization and Pitch Deck Team</p>
+                        <p>University: -</p>
+                        <p>Medsos: -</p>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <img src="assets/images/hmm.jpg" alt="Dilla Wahdana">
+                    <div class="bio">
+                        <p>Name: Muhammad Alvin Juliansyah Anshori</p>
+                        <p>Position: PIC Data Analysis and Front End Engineer</p>
+                        <p>University: SMIK Widya Cipta Dharma</p>
+                        <p>Medsos: -</p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </div>
     <!-- Content -->
 
     <!-- footer -->
-    <footer class="footer-wrapper">
-        <div class="container">
-            <h4>Copyright &copy; 2024 - Team 23</h4>
-        </div>
-    </footer>
+        <footer class="footer-wrapper">
+            <div class="container">
+                <div class="footer-content">
+                    <h4>Copyright &copy; 2024 - Team 23</h4>
+                    <div class="footer-links">
+                        <a href="https://github.com/Kampus-Merdeka-Software-Engineering/km-feb24-jayapura-23.git" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="team23.jayapura@gmail.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>        
     <!-- footer -->
 
     <!-- Scripts -->
@@ -157,8 +328,5 @@
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <!-- Custom JS -->
     <script src="js/script.js"></script>
-
-   
 </body>
 </html>
-
